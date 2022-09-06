@@ -6,7 +6,13 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*":["src/components/*"],
+      "@pages/*":["src/pages/*"],
+      "@store/*":["src/store/*"],
+    },
+    "allowJs": true, 
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
