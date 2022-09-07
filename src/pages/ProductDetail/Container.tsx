@@ -29,13 +29,13 @@ export const Container = () => {
   );
 
   const elementMap={
-    title:(value:string)=>{return value},
+    title:(value:string)=>{return value.replace(/<\/?[^>]+(>|$)/g, "")},
     image:(value:string)=><img className="w-24 object-contain mx-auto" src={value} alt={value} />,
     brand:(value:string)=>{return value},
-    price:(value:string)=>{return value},
+    lprice:(value:string)=><span className='text-red-500'>{parseInt(value).toLocaleString()}원</span>,
     category1:(value:string)=>{return value},
     linkBtn:(value:any)=>(
-    <Link to={`/detail/${value.productId}`} state={{...value}}><button>보기</button></Link>)
+    <button className="rounded-md px-2 py-1 bg-slate-600 text-white">보기</button>)
 
   }
   useEffect(() => {
