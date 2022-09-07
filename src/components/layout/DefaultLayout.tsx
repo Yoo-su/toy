@@ -5,7 +5,7 @@ type propsType = {
   children: React.ReactNode;
 };
 
-const Layout = ({ children }: propsType) => {
+const DefaultLayout = ({ children }: propsType) => {
   return (
     <Fragment>
       <Header />
@@ -14,4 +14,4 @@ const Layout = ({ children }: propsType) => {
   );
 };
 
-export default Layout;
+export default DefaultLayout;

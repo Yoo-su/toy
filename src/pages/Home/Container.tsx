@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Product, SearchBox, Chip, Select } from "./index";
-import Pagination from "@components/common/Pagination";
+import Pagination from "../../components/common/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   getProducts,
@@ -10,12 +10,12 @@ import {
   setSortOpt,
   setViewOpt,
   setCurPage,
-} from "@store/reducers/productReducer";
-import { RootState } from "@store/index";
+} from "../../store/reducers/productSlice";
+import { RootState, AppDispatch } from "../../store";
 
 //메인 홈 페이지 컴포넌트
-const Home = () => {
-  const dispatch = useDispatch();
+const Container = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
     products,
     loading,
@@ -47,7 +47,7 @@ const Home = () => {
       )}
 
       {/* 상품 개수정보 및 목록 보기 설정 옵션 */}
-      {products?.length >= 0 && (
+      {products?.length > 0 && (
         <div className="flex w-full border-b-2 md:px-24 justify-between pb-2">
           <span>{displayProducts.length}개의 상품</span>
 
@@ -55,9 +55,9 @@ const Home = () => {
             <Select
               value={selectedCategory}
               opts={Array.from(categories, (category) =>
-                Object.assign({}, { title: category, value: category }),
+                Object.assign({}, { title: category, value: category })
               )}
-              handleChange={(val) => {
+              handleChange={(val: string) => {
                 dispatch(setSelectedCategory(val));
                 dispatch(setCurPage(1));
                 dispatch(filterProductsByCategory(val));
@@ -72,7 +72,7 @@ const Home = () => {
                 { title: "낮은가격순", value: "asc" },
                 { title: "높은가격순", value: "dsc" },
               ]}
-              handleChange={(val) => {
+              handleChange={(val: string) => {
                 dispatch(setSortOpt(val));
                 dispatch(getProducts({ query: query, sortOpt: val }));
               }}
@@ -84,9 +84,9 @@ const Home = () => {
                 opts={[
                   { title: "10개", value: 10 },
                   displayProducts.length >= 10 && { title: "20개", value: 20 },
-                  displayProducts.length >= 20 && { title: "50개", value: 50 },
+                  displayProducts.length >= 20 && { title: "50개", value: 50 }
                 ]}
-                handleChange={(val) => {
+                handleChange={(val: string) => {
                   dispatch(setCurPage(1));
                   dispatch(setViewOpt(parseInt(val)));
                 }}
@@ -122,4 +122,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Container;

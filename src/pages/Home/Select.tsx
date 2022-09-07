@@ -9,11 +9,10 @@ const Select = ({ value, opts, handleChange }: selectProps) => {
         handleChange(e.target.value);
       }}
     >
-      {opts.map(
-        (opt) =>
-          opt && (
+      {opts?.map(
+        (opt) => typeof(opt)==="object" && (
             <option key={opt.value} value={opt.value}>
-              {opt.title}
+              {opt.title || '전체'}
             </option>
           ),
       )}

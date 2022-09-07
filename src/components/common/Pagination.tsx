@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import { setCurPage } from '../../store/reducers/productReducer';
-import { GrPrevious, GrNext } from 'react-icons/gr';
+import { Fragment } from "react";
+import { useDispatch } from "react-redux";
+import { setCurPage } from "../../store/reducers/productSlice";
+import { GrPrevious, GrNext } from "react-icons/gr";
 
 type propsType = {
   total: number;
@@ -35,7 +35,7 @@ const Pagination = ({ total, limit, page }: propsType) => {
                                         transition duration-150 text-sm"
               key={index + 1}
               onClick={() => dispatch(setCurPage(index + 1))}
-              aria-current={page === index + 1 ? 'page' : undefined}
+              aria-current={page === index + 1 ? "page" : undefined}
             >
               {index + 1}
             </button>

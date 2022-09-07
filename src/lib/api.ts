@@ -12,8 +12,6 @@ type propsType={
     sortOpt:string
 }
 
-
-
 export const getProductsByQuery=({query,sortOpt='sim'}:propsType)=>{
     return axios.get(baseURL,{
         params:{

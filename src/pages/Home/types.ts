@@ -6,6 +6,11 @@ export type searchBoxProps = {
     setQuery:Dispatch<SetStateAction<string>>
 }
 
+export type getProductArgs = {
+  query:string,
+  sortOpt:string
+}
+
 export type productProps = {
   title: string;
   image: string;
@@ -25,6 +30,6 @@ export type productProps = {
 
 export type selectProps = {
   value:string|number,
-  opts:Array<{title:string, value:string}>,
+  opts:Array<{title:string, value:string|number} | boolean>,
   handleChange:any
 }
