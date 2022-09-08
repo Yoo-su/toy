@@ -4,7 +4,7 @@ import {
   getProducts,
   setCurQuery,
   setCurPage,
-} from "../../store/reducers/productSlice";
+} from "../../store/slices/productSlice";
 import { GoSearch } from "react-icons/go";
 import { searchBoxProps } from "./types";
 import { RootState, AppDispatch } from "../../store";

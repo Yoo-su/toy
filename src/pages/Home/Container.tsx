@@ -10,7 +10,7 @@ import {
   setSortOpt,
   setViewOpt,
   setCurPage,
-} from "../../store/reducers/productSlice";
+} from "../../store/slices/productSlice";
 import { RootState, AppDispatch } from "../../store";
 
 //메인 홈 페이지 컴포넌트

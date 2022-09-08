@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
-import { setCurPage } from "../../store/reducers/productSlice";
+import { setCurPage } from "../../store/slices/productSlice";
 import { GrPrevious, GrNext } from "react-icons/gr";
 
 type propsType = {

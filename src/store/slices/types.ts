@@ -22,9 +22,10 @@ export type productType = {
 
 export type statesType = {
     curQuery:string,
-    products:productType[],
+    products:Array<productType>,
     displayProducts:productType[],
     similarProducts:productType[],
+    productDetail:productType | null,
 
     malls:string[],
     selectedMall:string,

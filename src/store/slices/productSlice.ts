@@ -22,6 +22,7 @@ const initialState: statesType = {
   products: [], // 검색된 전체 상품
   displayProducts: [], // 화면에 보여지는 상품
   similarProducts: [], // 현재 보고있는 상품과 비슷한 상품 (동일 브랜드, 카테고리)
+  productDetail:null,
 
   malls: [], // 상품 판매 브랜드 집합
   selectedMall: "", //선택된 브랜드
@@ -142,12 +143,19 @@ const productsSlice = createSlice({
         }
       }
     },
+
+    setProductDetail(state, action) {
+      state.productDetail =
+        state.products?.find(
+          (product: productType) => product.productId === action.payload
+        ) || null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state, action) => {
       state.loading = true;
     }),
-      builder.addCase(getProducts.fulfilled, (state, action) => {
+    builder.addCase(getProducts.fulfilled, (state, action) => {
         state.loading = false;
         const resList: Array<productType> = action.payload;
         state.products = resList;
@@ -183,5 +191,6 @@ export const {
   setViewOpt,
   setCurPage,
   setSimilarProducts,
+  setProductDetail
 } = productsSlice.actions;
 export const productsReducer = productsSlice.reducer;

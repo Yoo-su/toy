@@ -4,7 +4,7 @@ import {
   filterProductsByMall,
   setSelectedMall,
   setCurPage,
-} from "../../store/reducers/productSlice";
+} from "../../store/slices/productSlice";
 import { RootState, AppDispatch } from "../../store";
 
 interface propsType {
