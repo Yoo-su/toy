@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Product, SearchBox, Chip, Select } from "./index";
+import { Product, SearchBox, Chip } from "./index";
+import { Select } from "../../components/common/Select";
 import Pagination from "../../components/common/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import {

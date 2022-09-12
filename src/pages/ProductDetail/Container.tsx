@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Table from "./Table";
+import Table from "../../components/common/Table";
+import CircularProgress from "@mui/material/CircularProgress";
 import {
   setSimilarProducts,
   setProductDetail,
@@ -52,17 +53,17 @@ export const Container = () => {
 
   return (
     <article className="flex flex-col px-10 py-8">
-      {/* 상품 상세 정보 */}
-      <section className="flex rounded-lg shadow-lg">
+      {productDetail?(
+        <section className="flex rounded-lg shadow-lg">
         <img
-          src={productDetail?.image}
-          alt={productDetail?.image}
+          src={productDetail.image}
+          alt={productDetail.image}
           className="w-96 h-auto"
         />
 
         <section className="flex flex-col items-start justify-center pl-16 ml-8 my-8 space-y-3 border-l border-gray-300">
           <h1 className="text-4xl font-bold">
-            {productDetail?.title.replace(/<\/?[^>]+(>|$)/g, "")}
+            {productDetail.title.replace(/<\/?[^>]+(>|$)/g, "")}
           </h1>
           <div className="flex flex-col">
             <b className="text-red-500 text-xl">
@@ -72,30 +73,34 @@ export const Container = () => {
               원
             </b>
             <label className="text-gray-500 text-lg">{`${
-              productDetail?.category1
-            } ${productDetail?.category2 && " > " + productDetail?.category2} ${
-              productDetail?.category3 && " > " + productDetail?.category3
+              productDetail.category1
+            } ${productDetail.category2 && " > " + productDetail.category2} ${
+              productDetail.category3 && " > " + productDetail.category3
             } ${
-              productDetail?.category4 && " > " + productDetail?.category4
+              productDetail.category4 && " > " + productDetail.category4
             }`}</label>
           </div>
           <div>
             {productDetail?.brand && (
               <span className="flex items-center text-2xl">
                 <b className="text-lime-600">브랜드</b>{" "}
-                <b className="text-gray-800 ml-2">{productDetail?.brand}</b>
+                <b className="text-gray-800 ml-2">{productDetail.brand}</b>
               </span>
             )}
             <span className="flex items-center text-2xl">
               <b className="text-sky-700">판매몰</b>{" "}
-              <b className="text-gray-800 ml-2">{productDetail?.mallName}</b>
+              <b className="text-gray-800 ml-2">{productDetail.mallName}</b>
             </span>
           </div>
-          <a className="text-2xl" href={productDetail?.link}>
+          <a className="text-2xl" href={productDetail.link}>
             상품 링크
           </a>
         </section>
       </section>
+      ):(<CircularProgress />)}
+      
+      {/* 상품 상세 정보 */}
+      
 
       {/* 유사한 상품목록 */}
       {similarProducts.length > 1 && (
