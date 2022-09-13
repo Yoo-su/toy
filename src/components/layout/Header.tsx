@@ -13,7 +13,7 @@ export const Header = () => {
     } else {
       setIsTop(true);
     }
-  }, [isTop]);
+  }, []);
 
   useEffect(() => {
     document.addEventListener("scroll", onScroll);

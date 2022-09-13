@@ -15,7 +15,7 @@ interface propsType {
 const Chip = ({ text }: propsType) => {
   const dispatch = useDispatch<AppDispatch>();
   const { selectedMall } = useSelector(
-    (state: RootState) => state.productsReducer
+    (state: RootState) => state.persistedReducer.productReducer,
   );
 
   return (

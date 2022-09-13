@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Product, SearchBox, Chip } from "./index";
-import { Select } from "../../components/common/Select";
+import Select from "../../components/common/Select";
 import Pagination from "../../components/common/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
@@ -27,7 +27,7 @@ const Container = () => {
     selectedSortOpt,
     selectedViewOpt,
     curPage,
-  } = useSelector((state: RootState) => state.productsReducer);
+  } = useSelector((state: RootState) => state.persistedReducer.productReducer);
   const [query, setQuery] = useState("");
 
   //페이징용 변수
@@ -56,7 +56,7 @@ const Container = () => {
             <Select
               value={selectedCategory}
               opts={Array.from(categories, (category) =>
-                Object.assign({}, { title: category, value: category })
+                Object.assign({}, { title: category, value: category }),
               )}
               handleChange={(val: string) => {
                 dispatch(setSelectedCategory(val));
@@ -85,7 +85,7 @@ const Container = () => {
                 opts={[
                   { title: "10개", value: 10 },
                   displayProducts.length >= 10 && { title: "20개", value: 20 },
-                  displayProducts.length >= 20 && { title: "50개", value: 50 }
+                  displayProducts.length >= 20 && { title: "50개", value: 50 },
                 ]}
                 handleChange={(val: string) => {
                   dispatch(setCurPage(1));

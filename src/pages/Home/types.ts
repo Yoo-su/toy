@@ -1,15 +1,14 @@
-
 import { SetStateAction, Dispatch } from "react";
 
 export type searchBoxProps = {
-    query:string,
-    setQuery:Dispatch<SetStateAction<string>>
-}
+  query: string;
+  setQuery: Dispatch<SetStateAction<string>>;
+};
 
 export type getProductArgs = {
-  query:string,
-  sortOpt:string
-}
+  query: string;
+  sortOpt: string;
+};
 
 export type productProps = {
   title: string;
@@ -29,7 +28,7 @@ export type productProps = {
 };
 
 export type selectProps = {
-  value:string|number,
-  opts:Array<{title:string, value:string|number} | boolean>,
-  handleChange:any
-}
+  value: string | number;
+  opts: Array<{ title: string; value: string | number } | boolean>;
+  handleChange: any;
+};

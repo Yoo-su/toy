@@ -12,7 +12,9 @@ import { RootState, AppDispatch } from "../../store";
 //메인화면 검색창 컴포넌트
 const SearchBox = ({ query, setQuery }: searchBoxProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const { curQuery } = useSelector((state: RootState) => state.productsReducer);
+  const { curQuery } = useSelector(
+    (state: RootState) => state.persistedReducer.productReducer,
+  );
 
   const dispatchProducts = () => {
     if ((query.trim().length === 0) === false) {
@@ -36,6 +38,7 @@ const SearchBox = ({ query, setQuery }: searchBoxProps) => {
         className="flex-1 h-4/5 mr-4 focus:outline-sky-400 px-2"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        placeholder="검색어를 입력하세요 . . ."
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             dispatchProducts();
