@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DefaultLayout from "../components/layout";
 import Home from "../pages/Home";
 import ProductDetail from "../pages/ProductDetail";
+import Cart from "../pages/Cart";
 
 //라우터 컴포넌트
 const Router = () => (
@@ -21,6 +22,15 @@ const Router = () => (
         element={
           <DefaultLayout>
             <ProductDetail />
+          </DefaultLayout>
+        }
+      />
+
+      <Route
+        path="/cart"
+        element={
+          <DefaultLayout>
+            <Cart />
           </DefaultLayout>
         }
       />

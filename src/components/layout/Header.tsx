@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { FcPaid } from "react-icons/fc";
+import { FiShoppingBag } from "react-icons/fi";
 
 //화면 상단 헤더 컴포넌트
 export const Header = () => {
@@ -27,10 +28,16 @@ export const Header = () => {
         isTop ? "h-24 bg-gray-800" : "h-16 bg-gray-800/[0.8]"
       } z-50 cursor-pointer transition-all duration-150`}
     >
-      <nav className="flex items-center space-x-2">
+      <nav className="w-full flex items-center justify-between">
         <Link to="/">
           <div className="flex items-center">
             <FcPaid className="w-14 h-14 mr-2" />
+          </div>
+        </Link>
+
+        <Link to="/cart">
+          <div className="flex items-center">
+            <FiShoppingBag className="w-8 h-8 mr-2 text-white active:scale-75 transition duration-200" />
           </div>
         </Link>
       </nav>

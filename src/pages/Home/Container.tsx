@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Product, SearchBox, Chip } from "./index";
 import Select from "../../components/common/Select";
 import Pagination from "../../components/common/Pagination";
 import CircularProgress from "@mui/material/CircularProgress";
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import {
   getProducts,
   setSelectedCategory,
@@ -29,14 +30,17 @@ const Container = () => {
     curPage,
   } = useSelector((state: RootState) => state.persistedReducer.productReducer);
   const [query, setQuery] = useState("");
+  const setCurQuery = useCallback((val: string) => {
+    setQuery(val);
+  }, []);
 
   //페이징용 변수
   const offset = (curPage - 1) * selectedViewOpt;
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
       {/* 검색어 입력란 */}
-      <SearchBox query={query} setQuery={setQuery} />
+      <SearchBox query={query} setQuery={setCurQuery} />
 
       {/* 특정 업체 상품 보기 버튼들 */}
       {malls && (
@@ -102,7 +106,7 @@ const Container = () => {
         <CircularProgress className="my-12" />
       ) : (
         <div className="flex flex-col">
-          <div className="flex flex-wrap justify-center items-center">
+          <div className="flex flex-wrap justify-center mx-auto">
             {displayProducts
               .slice(offset, offset + selectedViewOpt)
               .map((product) => (
@@ -119,6 +123,13 @@ const Container = () => {
           page={curPage}
         />
       )}
+
+      <BsFillArrowUpCircleFill
+        className="w-14 h-14 cursor-pointer fixed bottom-10 right-10 text-sky-800 hover:opacity-70 active:scale-90 transition duration-200 z-50"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
     </div>
   );
 };

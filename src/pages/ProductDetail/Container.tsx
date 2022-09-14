@@ -12,7 +12,6 @@ import { RootState, AppDispatch } from "../../store";
 
 //상품 상세 페이지 컴포넌트
 export const Container = () => {
-  //const [productId, setProductId] = useState<string | undefined>("");
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMsg, setSnackbarMsg] = useState<string>("");
 
@@ -48,6 +47,7 @@ export const Container = () => {
   };
 
   useEffect(() => {
+    //url로부터 프로덕트 ID 추출, 상품 상세정보 저장
     dispatch(setProductDetail(window.location.pathname.split("/").at(-1)));
   }, [dispatch]);
 
@@ -62,11 +62,11 @@ export const Container = () => {
           />
 
           <section className="flex flex-col items-start justify-center pl-16 ml-8 my-8 space-y-3 border-l border-gray-300">
-            <h1 className="text-4xl font-bold">
+            <h1 className="text-5xl font-bold md:text-3xl">
               {productDetail.title.replace(/<\/?[^>]+(>|$)/g, "")}
             </h1>
             <div className="flex flex-col">
-              <b className="text-red-500 text-xl">
+              <b className="text-red-500 text-3xl md:text-2xl">
                 최저&nbsp;
                 {productDetail &&
                   parseInt(productDetail?.lprice).toLocaleString()}

@@ -1,5 +1,5 @@
 interface tableProps {
-  headData: Array<any>;
+  headData: Array<string>;
   bodyData: Array<any>;
   elementMap: any;
 }
@@ -8,7 +8,7 @@ const Table = ({ headData, bodyData, elementMap }: tableProps) => (
   <table className="table-auto shadow-lg text-gray-600 rounded-lg">
     <thead className="bg-gray-50 text-gray-700">
       <tr>
-        {headData.map((head: any) => (
+        {headData.map((head: string) => (
           <th key={head} scope="col" className="border py-3">
             {head}
           </th>

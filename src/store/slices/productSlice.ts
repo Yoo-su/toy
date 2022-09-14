@@ -175,9 +175,13 @@ const productsSlice = createSlice({
 
     //상품 장바구니에서 제거
     deleteProductFromCart(state, action) {
-      state.cart = state.cart.filter(
-        (product: productType) => product.productId !== action.payload,
-      );
+      if (action.payload) {
+        state.cart = state.cart.filter(
+          (product: productType) => product.productId !== action.payload,
+        );
+      } else {
+        state.cart = [];
+      }
     },
   },
   extraReducers: (builder) => {
@@ -202,6 +206,11 @@ const productsSlice = createSlice({
           );
           state.selectedCategory = "";
           state.categories = [""].concat(Array.from(categories));
+        } else {
+          state.malls = [];
+          state.selectedMall = "";
+          state.categories = [];
+          state.selectedCategory = "";
         }
       }),
       builder.addCase(getProducts.rejected, (state) => {
@@ -225,4 +234,5 @@ export const {
   setCurPage,
   setProductDetail,
   addProductToCart,
+  deleteProductFromCart,
 } = productsSlice.actions;

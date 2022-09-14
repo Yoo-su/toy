@@ -1,8 +1,6 @@
-import { SetStateAction, Dispatch } from "react";
-
 export type searchBoxProps = {
   query: string;
-  setQuery: Dispatch<SetStateAction<string>>;
+  setQuery: (val: string) => void;
 };
 
 export type getProductArgs = {
