@@ -2,6 +2,7 @@ import {
   createAsyncThunk,
   createSlice,
   combineReducers,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
@@ -55,7 +56,7 @@ const productsSlice = createSlice({
   initialState: initialState,
   reducers: {
     // 상품목록을 쇼핑몰에 따라 필터링
-    filterProductsByMall(state, action) {
+    filterProductsByMall(state, action: PayloadAction<string>) {
       if (action.payload === "")
         state.displayProducts =
           state.selectedCategory !== ""
@@ -74,12 +75,12 @@ const productsSlice = createSlice({
     },
 
     // 선택된 쇼핑몰 저장
-    setSelectedMall(state, action) {
+    setSelectedMall(state, action: PayloadAction<string>) {
       state.selectedMall = action.payload;
     },
 
     // 상품목록을 카테고리에 따라 필터링
-    filterProductsByCategory(state, action) {
+    filterProductsByCategory(state, action: PayloadAction<string>) {
       if (action.payload === "")
         state.displayProducts =
           state.selectedMall !== ""
@@ -98,36 +99,35 @@ const productsSlice = createSlice({
     },
 
     // 선택된 카테고리 저장
-    setSelectedCategory(state, action) {
+    setSelectedCategory(state, action: PayloadAction<string>) {
       state.selectedCategory = action.payload;
     },
 
     // 검색된 키워드 저장
-    setCurQuery(state, action) {
+    setCurQuery(state, action: PayloadAction<string>) {
       state.curQuery = action.payload;
     },
 
     // 선택된 정렬옵션 저장
-    setSortOpt(state, action) {
+    setSortOpt(state, action: PayloadAction<string>) {
       state.selectedSortOpt = action.payload;
     },
 
     // 선택된 보기옵션 저장
-    setViewOpt(state, action) {
+    setViewOpt(state, action: PayloadAction<number>) {
       state.selectedViewOpt = action.payload;
     },
 
     // 페이지 변경
-    setCurPage(state, action) {
+    setCurPage(state, action: PayloadAction<number>) {
       state.curPage = action.payload;
     },
 
     // 상품 상세정보 등록
-    setProductDetail(state, action) {
-      const productDetail: productType | null =
-        state.products?.find(
-          (product: productType) => product.productId === action.payload,
-        ) || null;
+    setProductDetail(state, action: PayloadAction<string>) {
+      const productDetail: productType = state.products?.filter(
+        (product: productType) => product.productId === action.payload,
+      )[0];
 
       state.productDetail = productDetail;
 
@@ -169,50 +169,54 @@ const productsSlice = createSlice({
     },
 
     // 상품 장바구니에 등록
-    addProductToCart(state, action) {
+    addProductToCart(state, action: PayloadAction<productType>) {
       state.cart = [...state.cart, action.payload];
     },
 
     //상품 장바구니에서 제거
-    deleteProductFromCart(state, action) {
-      if (action.payload) {
-        state.cart = state.cart.filter(
-          (product: productType) => product.productId !== action.payload,
-        );
-      } else {
-        state.cart = [];
-      }
+    deleteProductFromCart(state, action: PayloadAction<string>) {
+      state.cart = state.cart.filter(
+        (product: productType) => product.productId !== action.payload,
+      );
+    },
+
+    //장바구니 상품 전체 제거
+    deleteAllFromCart(state) {
+      state.cart = [];
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state, action) => {
+    builder.addCase(getProducts.pending, (state) => {
       state.loading = true;
     }),
-      builder.addCase(getProducts.fulfilled, (state, action) => {
-        state.loading = false;
-        const resList: Array<productType> = action.payload;
-        state.products = resList;
-        state.displayProducts = resList;
+      builder.addCase(
+        getProducts.fulfilled,
+        (state, action: PayloadAction<Array<productType>>) => {
+          state.loading = false;
+          const resList: Array<productType> = action.payload;
+          state.products = resList;
+          state.displayProducts = resList;
 
-        if (action.payload.length > 0) {
-          //브랜드 정보 저장
-          const malls = new Set(Array.from(resList, (item) => item.mallName));
-          state.selectedMall = "";
-          state.malls = [""].concat(Array.from(malls));
+          if (action.payload.length > 0) {
+            //브랜드 정보 저장
+            const malls = new Set(Array.from(resList, (item) => item.mallName));
+            state.selectedMall = "";
+            state.malls = [""].concat(Array.from(malls));
 
-          //카테고리 정보 저장
-          const categories = new Set(
-            Array.from(resList, (item) => item.category1),
-          );
-          state.selectedCategory = "";
-          state.categories = [""].concat(Array.from(categories));
-        } else {
-          state.malls = [];
-          state.selectedMall = "";
-          state.categories = [];
-          state.selectedCategory = "";
-        }
-      }),
+            //카테고리 정보 저장
+            const categories = new Set(
+              Array.from(resList, (item) => item.category1),
+            );
+            state.selectedCategory = "";
+            state.categories = [""].concat(Array.from(categories));
+          } else {
+            state.malls = [];
+            state.selectedMall = "";
+            state.categories = [];
+            state.selectedCategory = "";
+          }
+        },
+      ),
       builder.addCase(getProducts.rejected, (state) => {
         state.loading = false;
       });
@@ -235,4 +239,5 @@ export const {
   setProductDetail,
   addProductToCart,
   deleteProductFromCart,
+  deleteAllFromCart,
 } = productsSlice.actions;

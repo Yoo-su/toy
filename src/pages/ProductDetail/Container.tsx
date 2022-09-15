@@ -36,9 +36,8 @@ export const Container = () => {
         className="rounded-md px-2 py-1 bg-slate-600 text-white"
         onClick={() => {
           window.history.replaceState(null, "", `/detail/${value}`);
-          dispatch(
-            setProductDetail(window.location.pathname.split("/").at(-1)),
-          );
+          const productId = window.location.pathname.split("/").at(-1) || "";
+          dispatch(setProductDetail(productId));
         }}
       >
         보기
@@ -48,7 +47,8 @@ export const Container = () => {
 
   useEffect(() => {
     //url로부터 프로덕트 ID 추출, 상품 상세정보 저장
-    dispatch(setProductDetail(window.location.pathname.split("/").at(-1)));
+    const productId = window.location.pathname.split("/").at(-1) || "";
+    dispatch(setProductDetail(productId));
   }, [dispatch]);
 
   return (

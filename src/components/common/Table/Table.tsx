@@ -1,10 +1,16 @@
-interface tableProps {
+import { ReactElement } from "react";
+
+interface TableProps<T> {
   headData: Array<string>;
-  bodyData: Array<any>;
-  elementMap: any;
+  bodyData: T[];
+  elementMap: Record<string, string | ReactElement>;
 }
 
-const Table = ({ headData, bodyData, elementMap }: tableProps) => (
+const Table = <T extends { elementMap: T }>({
+  headData,
+  bodyData,
+  elementMap,
+}: TableProps<T>) => (
   <table className="table-auto shadow-lg text-gray-600 rounded-lg">
     <thead className="bg-gray-50 text-gray-700">
       <tr>

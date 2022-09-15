@@ -5,7 +5,7 @@ import Dialog from "@mui/material/Dialog";
 import { RiEmotionUnhappyLine, RiDeleteBin6Line } from "react-icons/ri";
 import { RootState, AppDispatch } from "../../store";
 import { productType } from "./types";
-import { deleteProductFromCart } from "../../store/slices/productSlice";
+import { deleteAllFromCart } from "../../store/slices/productSlice";
 
 const Container = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -62,7 +62,7 @@ const Container = () => {
             <button
               className="outline-none text-red-500 text-sm"
               onClick={() => {
-                dispatch(deleteProductFromCart(""));
+                dispatch(deleteAllFromCart());
                 handleDialogClose();
               }}
             >
