@@ -8,12 +8,12 @@ import { persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
 import { GET_PRODUCTS } from "../actions/actionTypes";
 import { getProductsByQuery } from "../../lib/api";
-import { productType, requestOptType, statesType } from "./types";
+import { ProductType, RequestOptType, StatesType } from "./types";
 
 //비동기 액션 생성
 export const getProducts = createAsyncThunk(
   GET_PRODUCTS,
-  async ({ query, sortOpt }: requestOptType) => {
+  async ({ query, sortOpt }: RequestOptType) => {
     try {
       const response = await getProductsByQuery({ query, sortOpt });
       return response.data.items;
@@ -30,7 +30,7 @@ const persistConfig = {
   storage: storageSession,
 };
 
-const initialState: statesType = {
+const initialState: StatesType = {
   curQuery: "", // 검색된 키워드
   products: [], // 검색된 전체 상품
   displayProducts: [], // 화면에 보여지는 상품
@@ -125,8 +125,8 @@ const productsSlice = createSlice({
 
     // 상품 상세정보 등록
     setProductDetail(state, action: PayloadAction<string>) {
-      const productDetail: productType = state.products?.filter(
-        (product: productType) => product.productId === action.payload,
+      const productDetail: ProductType = state.products?.filter(
+        (product: ProductType) => product.productId === action.payload,
       )[0];
 
       state.productDetail = productDetail;
@@ -166,17 +166,30 @@ const productsSlice = createSlice({
             );
         }
       }
+      state.similarProducts = Array.from(state.similarProducts, (product) =>
+        Object.assign(
+          {},
+          {
+            title: product.title,
+            productId: product.productId,
+            image: product.image,
+            brand: product.brand,
+            lprice: product.lprice,
+            category1: product.category1,
+          },
+        ),
+      );
     },
 
     // 상품 장바구니에 등록
-    addProductToCart(state, action: PayloadAction<productType>) {
+    addProductToCart(state, action: PayloadAction<ProductType>) {
       state.cart = [...state.cart, action.payload];
     },
 
     //상품 장바구니에서 제거
     deleteProductFromCart(state, action: PayloadAction<string>) {
       state.cart = state.cart.filter(
-        (product: productType) => product.productId !== action.payload,
+        (product: ProductType) => product.productId !== action.payload,
       );
     },
 
@@ -191,9 +204,9 @@ const productsSlice = createSlice({
     }),
       builder.addCase(
         getProducts.fulfilled,
-        (state, action: PayloadAction<Array<productType>>) => {
+        (state, action: PayloadAction<Array<ProductType>>) => {
           state.loading = false;
-          const resList: Array<productType> = action.payload;
+          const resList: Array<ProductType> = action.payload;
           state.products = resList;
           state.displayProducts = resList;
 

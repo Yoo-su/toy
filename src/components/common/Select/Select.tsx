@@ -1,7 +1,7 @@
-import { selectProps } from "../../../pages/Home/types";
+import { SelectProps } from "../../../pages/Home/types";
 
 //메인화면 검색 결과 필터링을 위한 select 컴포넌트
-const Select = ({ value, opts, handleChange }: selectProps) => (
+const Select = ({ value, opts, handleChange }: SelectProps) => (
   <select
     value={value}
     onChange={(e) => {

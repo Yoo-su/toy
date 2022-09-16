@@ -7,12 +7,12 @@ import {
 } from "../../store/slices/productSlice";
 import { RootState, AppDispatch } from "../../store";
 
-interface propsType {
+interface PropsType {
   text: string;
 }
 
 // 메인페이지 특정 브랜드 상품만 필터링하는 버튼 컴포넌트
-const Chip = ({ text }: propsType) => {
+const Chip = ({ text }: PropsType) => {
   const dispatch = useDispatch<AppDispatch>();
   const { selectedMall } = useSelector(
     (state: RootState) => state.persistedReducer.productReducer,

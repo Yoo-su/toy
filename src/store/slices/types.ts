@@ -1,9 +1,9 @@
-export type requestOptType = {
+export type RequestOptType = {
   query: string;
   sortOpt: string;
 };
 
-export type productType = {
+export type ProductType = {
   title: string;
   link: string;
   image: string;
@@ -11,7 +11,7 @@ export type productType = {
   hprice: string;
   mallName: string;
   productId: string;
-  productType: string;
+  ProductType: string;
   brand: string;
   maker: string;
   category1: string;
@@ -20,13 +20,22 @@ export type productType = {
   category4: string;
 };
 
-export type statesType = {
+export type SimilarProductType = {
+  title: string;
+  productId: string;
+  brand: string;
+  lprice: string;
+  category1: string;
+  image: string;
+};
+
+export type StatesType = {
   curQuery: string;
-  products: Array<productType>;
-  displayProducts: productType[];
-  similarProducts: productType[];
-  cart: productType[];
-  productDetail: productType | null;
+  products: Array<ProductType>;
+  displayProducts: ProductType[];
+  similarProducts: SimilarProductType[];
+  cart: ProductType[];
+  productDetail: ProductType | null;
 
   malls: string[];
   selectedMall: string;

@@ -7,11 +7,11 @@ import {
 } from "../../store/slices/productSlice";
 import { GoSearch } from "react-icons/go";
 import Snackbar from "../../components/common/Snackbar";
-import { searchBoxProps } from "./types";
+import { SearchBoxProps } from "./types";
 import { RootState, AppDispatch } from "../../store";
 
 //메인화면 검색창 컴포넌트
-const SearchBox = ({ query, setQuery }: searchBoxProps) => {
+const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { curQuery } = useSelector(

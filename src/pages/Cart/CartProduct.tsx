@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
-import { productType } from "./types";
+import { ProductType } from "./types";
 import { IoRocketSharp, IoCloseCircleSharp } from "react-icons/io5";
 import { AppDispatch } from "../../store";
 import { deleteProductFromCart } from "../../store/slices/productSlice";
 
-const CartProduct = (product: productType) => {
+const CartProduct = (product: ProductType) => {
   const dispatch = useDispatch<AppDispatch>();
   return (
     <figure className="flex rounded-lg shadow-lg p-0 bg-slate-50 mx-10 my-8">

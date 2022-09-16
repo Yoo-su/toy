@@ -9,9 +9,10 @@ import {
   addProductToCart,
 } from "../../store/slices/productSlice";
 import { RootState, AppDispatch } from "../../store";
+import { SimilarProductType } from "./types";
 
 //상품 상세 페이지 컴포넌트
-export const Container = () => {
+const Container = () => {
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [snackbarMsg, setSnackbarMsg] = useState<string>("");
 

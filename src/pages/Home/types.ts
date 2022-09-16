@@ -1,14 +1,14 @@
-export type searchBoxProps = {
+export type SearchBoxProps = {
   query: string;
   setQuery: (val: string) => void;
 };
 
-export type getProductArgs = {
+export type SetProductArgs = {
   query: string;
   sortOpt: string;
 };
 
-export type productProps = {
+export type ProductProps = {
   title: string;
   image: string;
   lprice: string;
@@ -17,7 +17,6 @@ export type productProps = {
   brand: string;
   maker: string;
   productId: string;
-  productType: string;
   category1: string;
   category2: string;
   category3: string;
@@ -25,8 +24,8 @@ export type productProps = {
   link: string;
 };
 
-export type selectProps = {
+export type SelectProps = {
   value: string | number;
   opts: Array<{ title: string; value: string | number } | boolean>;
-  handleChange: any;
+  handleChange: (val: string) => number | string | void;
 };

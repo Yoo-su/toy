@@ -1,6 +1,6 @@
 import { memo, useMemo, CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { productProps } from "./types";
+import { ProductProps } from "./types";
 
 //메인화면 상품정보 카드 컴포넌트
 const Product = ({
@@ -9,38 +9,12 @@ const Product = ({
   lprice,
   hprice,
   mallName,
-  brand,
-  maker,
   productId,
-  productType,
-  category1,
-  category2,
-  category3,
-  category4,
-  link,
-}: productProps) => {
+}: ProductProps) => {
   const refinedTitle = useMemo(() => title.replace(/<\/?[^>]+(>|$)/g, ""), []);
 
   return (
-    <Link
-      to={`/detail/${productId}`}
-      state={{
-        title: refinedTitle,
-        image,
-        lprice,
-        hprice,
-        mallName,
-        brand,
-        maker,
-        productId,
-        productType,
-        category1,
-        category2,
-        category3,
-        category4,
-        link,
-      }}
-    >
+    <Link to={`/detail/${productId}`}>
       <div className="flex flex-col rounded-md shadow-md w-40 bg-gray-50 cursor-pointer py-4 my-5 mx-8 hover:animate-pulse">
         <img
           className="w-full max-h-40 object-contain"

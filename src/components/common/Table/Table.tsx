@@ -1,16 +1,20 @@
-import { ReactElement } from "react";
+import React from "react";
 
 interface TableProps<T> {
   headData: Array<string>;
   bodyData: T[];
-  elementMap: Record<string, string | ReactElement>;
+  elementMap: Record<
+    keyof T,
+    (value: T[keyof T]) => string | number | React.ReactNode
+  >;
 }
 
-const Table = <T extends { elementMap: T }>({
-  headData,
-  bodyData,
-  elementMap,
-}: TableProps<T>) => (
+// eslint-disable-next-line @typescript-eslint/ban-types
+function objectKeys<T extends {}>(obj: T) {
+  return Object.keys(obj).map((objKey) => objKey as keyof T);
+}
+
+const Table = <T,>({ headData, bodyData, elementMap }: TableProps<T>) => (
   <table className="table-auto shadow-lg text-gray-600 rounded-lg">
     <thead className="bg-gray-50 text-gray-700">
       <tr>
@@ -23,11 +27,11 @@ const Table = <T extends { elementMap: T }>({
     </thead>
 
     <tbody>
-      {bodyData.map((body: any) => (
-        <tr key={body.productId}>
-          {Object.keys(elementMap).map((attr: string, index) => (
+      {bodyData.map((body, index: number) => (
+        <tr key={index}>
+          {objectKeys(elementMap).map((attr, index) => (
             <td key={index} className="border text-center px-4 py-2">
-              {elementMap[attr](body[attr])}
+              {elementMap?.[attr](body[attr])}
             </td>
           ))}
         </tr>

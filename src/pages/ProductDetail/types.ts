@@ -1,31 +1,8 @@
-export type locationStateType = {
+export type SimilarProductType = {
   title: string;
-  maker: string;
-  brand: string;
-  image: string;
-  category1: string;
-  category2: string;
-  category3: string;
-  category4: string;
-  lprice: string;
-  mallName: string;
-  link: string;
   productId: string;
-};
-
-export type productType = {
-  title: string;
-  link: string;
-  image: string;
-  lprice: string;
-  hprice: string;
-  mallName: string;
-  productId: string;
-  productType: string;
   brand: string;
-  maker: string;
+  lprice: string;
   category1: string;
-  category2: string;
-  category3: string;
-  category4: string;
+  image: string;
 };

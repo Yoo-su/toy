@@ -1,4 +1,4 @@
-export type productType = {
+export type ProductType = {
   title: string;
   link: string;
   image: string;
@@ -6,7 +6,6 @@ export type productType = {
   hprice: string;
   mallName: string;
   productId: string;
-  productType: string;
   brand: string;
   maker: string;
   category1: string;

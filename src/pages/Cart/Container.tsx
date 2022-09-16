@@ -4,7 +4,7 @@ import CartProduct from "./CartProduct";
 import Dialog from "@mui/material/Dialog";
 import { RiEmotionUnhappyLine, RiDeleteBin6Line } from "react-icons/ri";
 import { RootState, AppDispatch } from "../../store";
-import { productType } from "./types";
+import { ProductType } from "./types";
 import { deleteAllFromCart } from "../../store/slices/productSlice";
 
 const Container = () => {
@@ -38,7 +38,7 @@ const Container = () => {
 
       <div className="flex flex-wrap justify-center">
         {cart.length > 0 ? (
-          cart.map((product: productType) => (
+          cart.map((product: ProductType) => (
             <CartProduct key={product.productId} {...product} />
           ))
         ) : (
